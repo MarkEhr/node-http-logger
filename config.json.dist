@@ -1,4 +1,11 @@
 {
   "port": 3000,
-  "logFile": "requests.log"
+  "logFile": "requests.log",
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\"message\": \"Hello, world!\"}"
+  }
 }

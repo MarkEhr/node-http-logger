@@ -2,9 +2,17 @@ const http = require('http');
 const fs = require('fs');
 const config = require('./config.json');
 
+const defaultResponse = {
+    "status": 200,
+    "body": "{\"message\": \"Hello, world!\"}"
+};
+
 // Configuration
 const port = config.port? Number(config.port) : 3000;
 const logFile = config.logFile? config.logFile : 'requests.log';
+const response = config.response? config.response : defaultResponse;
+if(!response.status ) response.status = 200;
+if(!response.body ) response.body = "Request logged";
 
 // Set up server
 const server = http.createServer((req, res) => {
@@ -29,8 +37,11 @@ ${body}
 
         fs.appendFileSync(logFile, logEntry);
 
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Request logged');
+        if( response.headers ) {
+            const status = response.status? response.status : 200;
+            res.writeHead(status, response.headers);
+        }
+        res.end(response.body);
     });
 });
 
