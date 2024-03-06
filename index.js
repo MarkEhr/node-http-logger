@@ -19,11 +19,13 @@ const server = http.createServer((req, res) => {
 -------------------------------------
 Date: ${new Date().toISOString()}
 IP: ${req.socket.remoteAddress}
-URL: ${req.url}
+URL: ${req.method} ${req.url}
 Headers: ${JSON.stringify(req.headers, null, 2)}
 Body:
 ${body}
 `;
+
+        console.log( `${new Date().toISOString()} - Received request to ${req.URL}` );
 
         fs.appendFileSync(logFile, logEntry);
 
