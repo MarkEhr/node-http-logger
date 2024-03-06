@@ -25,7 +25,7 @@ Body:
 ${body}
 `;
 
-        console.log( `${new Date().toISOString()} - Received request to ${req.URL}` );
+        console.log( `${new Date().toISOString()} - Received request to ${req.url}` );
 
         fs.appendFileSync(logFile, logEntry);
 
